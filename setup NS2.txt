@@ -1,0 +1,67 @@
+http://chipvc.wordpress.com/2010/08/26/setup-ns2-install-ns2-allinone-on-ubuntu/
+
+
+
+http://www.isi.edu/nsnam/nam/
+
+
+http://www.isi.edu/nsnam/ns/
+
+
+http://vnpro.org/forum/showthread.php/13372-H%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-c%C3%A0i-%C4%91%E1%BA%B7t-NS-2-%C4%91%E1%BB%83-m%C3%B4-ph%E1%BB%8Fng-MPLS-TE
+
+
+
+//////////////////////////////
+
+NS2.34 installs smoothly with gcc compiler version 4.3. By default, Ubuntu10.10 ships with gcc-4.4.5. So we use a downgraded compiler version for the installation. This is done as follows :
+
+Edit Makefile.in found at this location ns-allinone-2.34/otcl-1.13/Makefile.in as follows: 
+
+Find the line that says:
+CC= @CC@
+and change it to:
+CC= gcc-4.3
+
+0. Download
+1. Giải nén ns-allinone-2.34
+
+    tar -xzvf ns-allinone-2.34.tar.gz
+
+2,Di chuyển vào thư mục ns-allinone-2.34 bằng lệnh
+
+    cd ns-allinone-2.34
+
+Cài đặt thêm các gói cần thiết
+
+    sudo apt-get install -f build-essential libxt-dev libxt6 libsm-dev libsm6 libice-dev libice6 libxmu-dev
+
+3.Thực hiện lênh sau để cài đặt.
+
+    ./install
+4.     gedit ~/.bashrc
+
+# LD_LIBRARY_PATH
+OTCL_LIB=/home/trungkien/ns-allinone-2.34/otcl-1.13
+NS2_LIB=/home/trungkien/ns-allinone-2.34/lib
+X11_LIB=/usr/X11R6/lib
+USR_LOCAL_LIB=/usr/local/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OTCL_LIB:$NS2_LIB:$X11_LIB:$USR_LOCAL_LIB
+
+# TCL_LIBRARY
+TCL_LIB=/home/trungkien/ns-allinone-2.34/tcl8.4.18/library
+USR_LIB=/usr/lib
+export TCL_LIBRARY=$TCL_LIB:$USR_LIB
+
+# PATH
+XGRAPH=/home/trungkien/ns-allinone-2.34/bin:/home/trungkien/ns-allinone-2.34/tcl8.4.18/unix:/home/trungkien/ns-allinone-2.34/tk8.4.18/unix
+NS=/home/trungkien/ns-allinone-2.34/ns-2.33/
+NAM=/home/trungkien/ns-allinone-2.34/nam-1.14/
+PATH=$PATH:$XGRAPH:$NS:$NAM
+
+5. : For the changes to take effect immediately, do the following:
+
+$ sudo su
+# source /home/micman/.bashrc
+
+or simply quit the Terminal and open it again.

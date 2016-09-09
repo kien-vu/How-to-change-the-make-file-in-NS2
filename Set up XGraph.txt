@@ -1,0 +1,8 @@
+Installation instructions: download the source code, extract tar file with gzip (gnu zip, not pkzip) and tar, 
+run ./configure, 
+make all, 
+make install. See internal README files for additional details.
+
+We do not plan to make binaries available, although we link to binaries provided by others.
+
+sudo apt-get install xgraph
